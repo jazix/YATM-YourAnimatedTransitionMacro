@@ -242,13 +242,29 @@ public class SourceBoxPanel extends JPanel {
 		return new SourceBox(
 				index,
 				this.chkEnableBox.isSelected(),
-				new Position(Float.parseFloat(this.txtStartPosX.getText()),Float.parseFloat(this.txtStartPosY.getText())),
-				new Position(Float.parseFloat(this.txtEndPosX.getText()),Float.parseFloat(this.txtEndPosY.getText())),
-				Float.parseFloat(this.txtStartSize.getText()),
-				Float.parseFloat(this.txtEndSize.getText()),
+				
+				new Position(
+						Float.parseFloat(this.txtStartPosX.getText().isBlank() ? "0" : this.txtStartPosX.getText()),
+						Float.parseFloat(this.txtStartPosY.getText().isBlank() ? "0" : this.txtStartPosY.getText())),
+				new Position(
+						Float.parseFloat(this.txtEndPosX.getText().isBlank() ? "0" : this.txtEndPosX.getText()),
+						Float.parseFloat(this.txtEndPosY.getText().isBlank() ? "0" : this.txtEndPosY.getText())),
+				
+				Float.parseFloat(this.txtStartSize.getText().isBlank() ? "0" : this.txtStartSize.getText()),
+				Float.parseFloat(this.txtEndSize.getText().isBlank() ? "0" : this.txtEndSize.getText()),
+				
 				this.chkEnableCrop.isSelected(),
-				new Crop(Float.parseFloat(this.txtStartCropTop.getText()),Float.parseFloat(this.txtStartCropLeft.getText()),Float.parseFloat(this.txtStartCropRight.getText()),Float.parseFloat(this.txtStartCropBottom.getText())),
-				new Crop(Float.parseFloat(this.txtEndCropTop.getText()),Float.parseFloat(this.txtEndCropLeft.getText()),Float.parseFloat(this.txtEndCropRight.getText()),Float.parseFloat(this.txtEndCropBottom.getText()))
+				
+				new Crop(
+						Float.parseFloat(this.txtStartCropTop.getText().isBlank() ? "0" : this.txtStartCropTop.getText()),
+						Float.parseFloat(this.txtStartCropLeft.getText().isBlank() ? "0" : this.txtStartCropLeft.getText()),
+						Float.parseFloat(this.txtStartCropRight.getText().isBlank() ? "0" : this.txtStartCropRight.getText()),
+						Float.parseFloat(this.txtStartCropBottom.getText().isBlank() ? "0" : this.txtStartCropBottom.getText())),
+				new Crop(
+						Float.parseFloat(this.txtEndCropTop.getText().isBlank() ? "0" : this.txtEndCropTop.getText()),
+						Float.parseFloat(this.txtEndCropLeft.getText().isBlank() ? "0" : this.txtEndCropLeft.getText()),
+						Float.parseFloat(this.txtEndCropRight.getText().isBlank() ? "0" : this.txtEndCropRight.getText()),
+						Float.parseFloat(this.txtEndCropBottom.getText().isBlank() ? "0" : this.txtEndCropBottom.getText()))
 			);
 	}
 }

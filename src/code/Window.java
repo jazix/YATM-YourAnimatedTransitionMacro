@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JFileChooser;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import java.awt.Color;
 
 
@@ -29,14 +33,6 @@ import java.awt.Color;
  * max chars:
  * 	title: 20
  *  desc: 125
- *  
- * box an/aus schalten
- * <Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\"True\"/>
- * crops an/aus schalten per box
- * <Op id="SuperSourceV2BoxMaskEnable" superSource="0" boxIndex="1" enable="True"/>
- * <Op id="SuperSourceV2BoxMaskEnable" superSource="0" boxIndex="1" enable="False"/>
- * 
- * 
  */
 
 public class Window extends JFrame {
@@ -56,6 +52,7 @@ public class Window extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Window frame = new Window();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -73,9 +70,12 @@ public class Window extends JFrame {
 	private SourceBoxPanel sourceBoxPanel3;
 	private SourceBoxPanel sourceBoxPanel4;
 	public Window() {
+		setTitle("YTM - Your Transition Macro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 846, 655);
+		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
+		setIconImage(icon);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +84,7 @@ public class Window extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("title:");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(27, 42, 89, 14);
+		lblNewLabel.setBounds(27, 43, 89, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("description:");
@@ -94,7 +94,7 @@ public class Window extends JFrame {
 		
 		lblNewLabel_3 = new JLabel("index:");
 		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setBounds(24, 11, 59, 14);
+		lblNewLabel_3.setBounds(27, 14, 59, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		sourceBoxPanel1 = new SourceBoxPanel();
@@ -131,17 +131,17 @@ public class Window extends JFrame {
 		contentPane.add(btnSave);
 		
 		txtDescription = new JTextField();
-		txtDescription.setBounds(115, 65, 265, 20);
+		txtDescription.setBounds(115, 68, 265, 20);
 		contentPane.add(txtDescription);
 		txtDescription.setColumns(10);
 		
 		txtTitle = new JTextField();
-		txtTitle.setBounds(115, 34, 187, 20);
+		txtTitle.setBounds(115, 40, 187, 20);
 		contentPane.add(txtTitle);
 		txtTitle.setColumns(10);
 		
 		txtIndex = new JTextField();
-		txtIndex.setBounds(115, 3, 22, 20);
+		txtIndex.setBounds(115, 11, 22, 20);
 		contentPane.add(txtIndex);
 		txtIndex.setColumns(10);
 		
@@ -169,7 +169,13 @@ public class Window extends JFrame {
 			boxes.add(this.sourceBoxPanel4.getSourceBox(4));
 						
 			//generate macro
-			Macro macro = new Macro(Integer.parseInt(txtIndex.getText()),txtTitle.getText(),txtDescription.getText(),boxes,Integer.parseInt(txtFrameCount.getText()));
+			Macro macro = new Macro(
+				Integer.parseInt(txtIndex.getText().isBlank() ? "1" : txtIndex.getText()),
+				txtTitle.getText().isBlank() ? "new_macro" : txtTitle.getText(),
+				txtDescription.getText(),
+				boxes,
+				Integer.parseInt(txtFrameCount.getText().isBlank() ? "1" : txtFrameCount.getText())
+			);
 			String tmp = macro.generate();
 			
 			//write macro to file
