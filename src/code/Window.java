@@ -21,18 +21,22 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 
 /*
  * TODO:
+ * max chars:
+ * 	title: 20
+ *  desc: 125
+ *  
  * box an/aus schalten
- * 
+ * <Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\"True\"/>
  * crops an/aus schalten per box
  * <Op id="SuperSourceV2BoxMaskEnable" superSource="0" boxIndex="1" enable="True"/>
  * <Op id="SuperSourceV2BoxMaskEnable" superSource="0" boxIndex="1" enable="False"/>
  * 
  * 
- * umbauen auf genau 4 boxes
  */
 
 public class Window extends JFrame {
@@ -61,124 +65,85 @@ public class Window extends JFrame {
 		});
 	}
 
-	public List<SourceBoxPanel> sourceBoxes = new LinkedList<SourceBoxPanel>();
-	public Box scrollBox = Box.createVerticalBox();
 	private JTextField txtFrameCount;
-	private JScrollPane scrollPane;
 	private JLabel lblNewLabel_3;
 	private JTextField txtIndex;
+	private SourceBoxPanel sourceBoxPanel1;
+	private SourceBoxPanel sourceBoxPanel2;
+	private SourceBoxPanel sourceBoxPanel3;
+	private SourceBoxPanel sourceBoxPanel4;
 	public Window() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1170, 650);
+		setBounds(100, 100, 846, 655);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("title:");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 2;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 1;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
-		txtTitle = new JTextField();
-		GridBagConstraints gbc_txtTitle = new GridBagConstraints();
-		gbc_txtTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_txtTitle.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtTitle.gridx = 4;
-		gbc_txtTitle.gridy = 1;
-		contentPane.add(txtTitle, gbc_txtTitle);
-		txtTitle.setColumns(10);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(27, 42, 89, 14);
+		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("description:");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 2;
-		gbc_lblNewLabel_1.gridy = 2;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		txtDescription = new JTextField();
-		GridBagConstraints gbc_txtDescription = new GridBagConstraints();
-		gbc_txtDescription.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDescription.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDescription.gridx = 4;
-		gbc_txtDescription.gridy = 2;
-		contentPane.add(txtDescription, gbc_txtDescription);
-		txtDescription.setColumns(10);
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setBounds(27, 71, 106, 14);
+		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_3 = new JLabel("index:");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 2;
-		gbc_lblNewLabel_3.gridy = 3;
-		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setBounds(24, 11, 59, 14);
+		contentPane.add(lblNewLabel_3);
 		
-		txtIndex = new JTextField();
-		GridBagConstraints gbc_txtIndex = new GridBagConstraints();
-		gbc_txtIndex.insets = new Insets(0, 0, 5, 5);
-		gbc_txtIndex.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtIndex.gridx = 4;
-		gbc_txtIndex.gridy = 3;
-		contentPane.add(txtIndex, gbc_txtIndex);
-		txtIndex.setColumns(10);
+		sourceBoxPanel1 = new SourceBoxPanel();
+		sourceBoxPanel1.setBounds(10, 96, 398, 248);
+		contentPane.add(sourceBoxPanel1);
 		
-		JButton btnAdd = new JButton("add");
-		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
-		gbc_btnAdd.gridwidth = 2;
-		gbc_btnAdd.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAdd.gridx = 13;
-		gbc_btnAdd.gridy = 4;
-		contentPane.add(btnAdd, gbc_btnAdd);
+		sourceBoxPanel2 = new SourceBoxPanel();
+		sourceBoxPanel2.setBounds(10, 355, 398, 248);
+		contentPane.add(sourceBoxPanel2);
 		
-		scrollPane = new JScrollPane(scrollBox);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 7;
-		gbc_scrollPane.gridwidth = 13;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 2;
-		gbc_scrollPane.gridy = 5;
-		contentPane.add(scrollPane, gbc_scrollPane);
+		sourceBoxPanel3 = new SourceBoxPanel();
+		sourceBoxPanel3.setBounds(418, 96, 398, 248);
+		contentPane.add(sourceBoxPanel3);
+		
+		sourceBoxPanel4 = new SourceBoxPanel();
+		sourceBoxPanel4.setBounds(418, 355, 398, 248);
+		contentPane.add(sourceBoxPanel4);
 		
 		JLabel lblNewLabel_2 = new JLabel("number of frames:");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 2;
-		gbc_lblNewLabel_2.gridy = 13;
-		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setBounds(418, 71, 130, 14);
+		contentPane.add(lblNewLabel_2);
 		
 		txtFrameCount = new JTextField();
-		GridBagConstraints gbc_txtFrameCount = new GridBagConstraints();
-		gbc_txtFrameCount.insets = new Insets(0, 0, 5, 5);
-		gbc_txtFrameCount.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtFrameCount.gridx = 4;
-		gbc_txtFrameCount.gridy = 13;
-		contentPane.add(txtFrameCount, gbc_txtFrameCount);
+		txtFrameCount.setBounds(544, 68, 22, 20);
+		contentPane.add(txtFrameCount);
 		txtFrameCount.setColumns(10);
 		
-		JButton btnSave = new JButton("Speichern");
-		GridBagConstraints gbc_btnSave = new GridBagConstraints();
-		gbc_btnSave.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSave.gridwidth = 2;
-		gbc_btnSave.gridx = 13;
-		gbc_btnSave.gridy = 14;
-		contentPane.add(btnSave, gbc_btnSave);
+		JButton btnSave = new JButton("save to file");
+		btnSave.setIcon(null);
+		btnSave.setBackground(Color.WHITE);
+		btnSave.setForeground(Color.DARK_GRAY);
+		btnSave.setBounds(710, 67, 106, 23);
+		contentPane.add(btnSave);
 		
-		btnAdd.addActionListener(e -> {
-			SourceBoxPanel sourceBoxPanel = new SourceBoxPanel();
-			scrollBox.add(sourceBoxPanel,Box.createVerticalGlue());
-			scrollBox.add(Box.createVerticalStrut(10));
-			sourceBoxes.add(sourceBoxPanel);
-			validate();
-			repaint();
-		});
+		txtDescription = new JTextField();
+		txtDescription.setBounds(115, 65, 265, 20);
+		contentPane.add(txtDescription);
+		txtDescription.setColumns(10);
+		
+		txtTitle = new JTextField();
+		txtTitle.setBounds(115, 34, 187, 20);
+		contentPane.add(txtTitle);
+		txtTitle.setColumns(10);
+		
+		txtIndex = new JTextField();
+		txtIndex.setBounds(115, 3, 22, 20);
+		contentPane.add(txtIndex);
+		txtIndex.setColumns(10);
 		
 		btnSave.addActionListener(e -> {
 			
@@ -198,22 +163,11 @@ public class Window extends JFrame {
 			
 			//collect Box parameters
 			List<SourceBox> boxes = new LinkedList<>();
-			
-			for(int i = 0; i < sourceBoxes.size(); i++) {
-				SourceBoxPanel that = (SourceBoxPanel)sourceBoxes.get(i);
-				boxes.add(
-						new SourceBox(
-							i,
-							new Position(Float.parseFloat(that.txtStartPosX.getText()),Float.parseFloat(that.txtStartPosY.getText())),
-							new Position(Float.parseFloat(that.txtEndPosX.getText()),Float.parseFloat(that.txtEndPosY.getText())),
-							Float.parseFloat(that.txtStartSize.getText()),
-							Float.parseFloat(that.txtEndSize.getText()),
-							new Crop(Float.parseFloat(that.txtStartCropTop.getText()),Float.parseFloat(that.txtStartCropLeft.getText()),Float.parseFloat(that.txtStartCropRight.getText()),Float.parseFloat(that.txtStartCropBottom.getText())),
-							new Crop(Float.parseFloat(that.txtEndCropTop.getText()),Float.parseFloat(that.txtEndCropLeft.getText()),Float.parseFloat(that.txtEndCropRight.getText()),Float.parseFloat(that.txtEndCropBottom.getText()))
-						)		
-				);
-			}	
-			
+			boxes.add(this.sourceBoxPanel1.getSourceBox(1));
+			boxes.add(this.sourceBoxPanel2.getSourceBox(2));
+			boxes.add(this.sourceBoxPanel3.getSourceBox(3));
+			boxes.add(this.sourceBoxPanel4.getSourceBox(4));
+						
 			//generate macro
 			Macro macro = new Macro(Integer.parseInt(txtIndex.getText()),txtTitle.getText(),txtDescription.getText(),boxes,Integer.parseInt(txtFrameCount.getText()));
 			String tmp = macro.generate();

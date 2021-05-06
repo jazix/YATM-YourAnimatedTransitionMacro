@@ -6,27 +6,35 @@ import java.util.List;
 public class SourceBox {
 	
 	private int index;
+	private boolean enable;
 	private Position startPosition;
 	private Position endPosition;
 	private float startSize;
 	private float endSize;
+	private boolean enableCrop;
 	private Crop startCrop;
 	private Crop endCrop;
 	
 	public SourceBox() {}
 	
-	public SourceBox(int index, Position startPosition, Position endPosition, float startSize, float endSize, Crop startCrop, Crop endCrop) {
+	public SourceBox(int index, boolean enable, Position startPosition, Position endPosition, float startSize, float endSize, boolean enableCrop, Crop startCrop, Crop endCrop) {
 		this.index = index;
+		this.enable = enable;
 		this.startPosition = startPosition;
 		this.endPosition = endPosition;
 		this.startSize = startSize;
 		this.endSize = endSize;
+		this.enableCrop = enableCrop;
 		this.startCrop = startCrop;
 		this.endCrop = endCrop;
 	}
 	
 	public int getIndex() {
 		return this.index;
+	}
+	
+	public boolean isEnabled() {
+		return this.enable;
 	}
 	
 	public Position getStartPosition() {
@@ -44,6 +52,10 @@ public class SourceBox {
 	
 	public float getEndSize() {
 		return this.endSize;
+	}
+	
+	public boolean isCropEnabled() {
+		return this.enableCrop;
 	}
 	
 	public Crop getStartCrop() {
