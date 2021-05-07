@@ -20,7 +20,7 @@ public class Macro {
 	
 	public String generate() {
 		//header
-		String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+		String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 				+ "<Profile majorVersion=\"1\" minorVersion=\"5\" product=\"ATEM Mini Extreme\">\r\n"
 				+ "<MacroPool>\r\n"
 				+ "<Macro index=\""+index+"\" name=\""+title+"\" description=\""+description+"\">";
@@ -30,8 +30,8 @@ public class Macro {
 		for(SourceBox box : sourceBoxes) {
 			String source = box.getInputSource().replaceAll("\\s+","");
 			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isEnabled()?"True":"False")+"\"/>"
-					+ "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isCropEnabled()?"True":"False")+"\"/>"
-					+ (source.equals("none")?"":"\r\n<Op id=\"SuperSourceV2BoxInput\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" input=\""+source+"\"/>");
+					+ (source.equals("none")?"":"\r\n<Op id=\"SuperSourceV2BoxInput\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" input=\""+source+"\"/>")
+					+ "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isCropEnabled()?"True":"False")+"\"/>";
 		}
 		
 		//calculate frames

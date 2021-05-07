@@ -193,6 +193,44 @@ public class Window extends JFrame {
 	        	this.txtDescription.setText(ex.toString());
 	        }
 		});
+
+		/*
+		JButton btnRead = new JButton("import macro");
+		btnRead.setIcon(null);
+		btnRead.setBackground(Color.WHITE);
+		btnRead.setForeground(Color.DARK_GRAY);
+		btnRead.setBounds(710, 37, 106, 23);
+		contentPane.add(btnRead);
+		
+		btnRead.addActionListener(e -> {
+			//select target file
+			File fileToRead;
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Specify a file to read");   
+			 
+			int userSelection = fileChooser.showOpenDialog(this);
+			 
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+				fileToRead = fileChooser.getSelectedFile();
+
+			    System.out.println("Read file: " + fileToRead.getAbsolutePath());
+			} else {
+				return;
+			}	
+			
+			//TODO
+			//read header
+				//index
+				//title
+				//desc
+				//enabled cams
+				//enabled crops
+				//inputSources
+			//count frames
+			//read first frame
+			//read last frame
+			
+		});*/
 	}
 
 	/*
