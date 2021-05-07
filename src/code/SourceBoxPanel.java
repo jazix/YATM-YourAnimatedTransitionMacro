@@ -367,4 +367,24 @@ public class SourceBoxPanel extends JPanel {
 
 		return new SourceBox(this.index, enabled, inputSource, startPos, endPos, startSize, endSize, cropEnabled, startCrop, endCrop);
 	}
+	
+	public void loadSourceBox(SourceBox sourceBox) {
+		this.chkEnableBox.setSelected(sourceBox.isEnabled());
+		this.comboInputSource.setSelectedItem(sourceBox.getInputSource());
+		this.txtStartPosX.setText(sourceBox.getStartPosition().getX()+"");
+		this.txtStartPosY.setText(sourceBox.getStartPosition().getY()+"");
+		this.txtEndPosX.setText(sourceBox.getEndPosition().getX()+"");
+		this.txtEndPosY.setText(sourceBox.getEndPosition().getY()+"");
+		this.txtStartSize.setText(sourceBox.getStartSize()+"");
+		this.txtEndSize.setText(sourceBox.getEndSize()+"");
+		this.chkEnableCrop.setSelected(sourceBox.isCropEnabled());
+		this.txtStartCropTop.setText(sourceBox.getStartCrop().getTop()+"");
+		this.txtStartCropLeft.setText(sourceBox.getStartCrop().getLeft()+"");
+		this.txtStartCropRight.setText(sourceBox.getStartCrop().getRight()+"");
+		this.txtStartCropBottom.setText(sourceBox.getStartCrop().getBottom()+"");
+		this.txtEndCropTop.setText(sourceBox.getEndCrop().getTop()+"");
+		this.txtEndCropLeft.setText(sourceBox.getEndCrop().getLeft()+"");
+		this.txtEndCropRight.setText(sourceBox.getEndCrop().getRight()+"");
+		this.txtEndCropBottom.setText(sourceBox.getEndCrop().getBottom()+"");
+	}
 }

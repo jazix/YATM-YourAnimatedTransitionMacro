@@ -2,7 +2,6 @@ package code;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -33,16 +32,10 @@ import javax.swing.SwingConstants;
 
 public class Window extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtTitle;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -127,7 +120,7 @@ public class Window extends JFrame {
 		btnSave.setIcon(null);
 		btnSave.setBackground(Color.WHITE);
 		btnSave.setForeground(Color.DARK_GRAY);
-		btnSave.setBounds(914, 67, 106, 23);
+		btnSave.setBounds(914, 50, 106, 23);
 		contentPane.add(btnSave);
 		
 		txtTitle = new JTextField();
@@ -226,7 +219,7 @@ public class Window extends JFrame {
 		btnRead.setIcon(null);
 		btnRead.setBackground(Color.WHITE);
 		btnRead.setForeground(Color.DARK_GRAY);
-		btnRead.setBounds(710, 37, 106, 23);
+		btnRead.setBounds(914, 21, 106, 23);
 		contentPane.add(btnRead);
 		
 		btnRead.addActionListener(e -> {
@@ -246,9 +239,21 @@ public class Window extends JFrame {
 			}	
 			
 			MacroReader reader = new MacroReader();
-			reader.read(fileToRead);
+			
+			loadSettings(reader.read(fileToRead));
 			
 		});
+	}
+	
+	public void loadSettings(MacroSettings settings) {
+		this.txtIndex.setText(settings.getIndex()+"");
+		this.txtTitle.setText(settings.getTitle());
+		this.txtDescription.setText(settings.getDescription());
+		this.txtFrameCount.setText(settings.getFrameCount()+"");
+		this.sourceBoxPanel1.loadSourceBox(settings.getSourceBoxes().get(0));
+		this.sourceBoxPanel2.loadSourceBox(settings.getSourceBoxes().get(1));
+		this.sourceBoxPanel3.loadSourceBox(settings.getSourceBoxes().get(2));
+		this.sourceBoxPanel4.loadSourceBox(settings.getSourceBoxes().get(3));
 	}
 	
 	/*

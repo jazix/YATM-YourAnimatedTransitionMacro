@@ -18,6 +18,10 @@ public class SourceBox {
 	
 	public SourceBox() {}
 	
+	public SourceBox(int index) {
+		this.index = index;
+	}
+	
 	public SourceBox(int index, boolean enable, String inputSource, Position startPosition, Position endPosition, float startSize, float endSize, boolean enableCrop, Crop startCrop, Crop endCrop) {
 		this.index = index;
 		this.enable = enable;
@@ -135,5 +139,45 @@ public class SourceBox {
 	
 	public Crop getCrop(int i) {
 		return crops.get(i);
+	}
+	
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enable = enabled;
+	}
+	
+	public void setStartPosition(Position startPos) {
+		this.startPosition = startPos;
+	}
+	
+	public void setEndPosition(Position endPos) {
+		this.endPosition = endPos;
+	}
+	
+	public void setStartSize(float startSize) {
+		this.startSize = startSize;
+	}
+	
+	public void setEndSize(float endSize) {
+		this.endSize = endSize;
+	}
+	
+	public void setEnableCrop(boolean enabled) {
+		this.enableCrop = enabled;
+	}
+	
+	public void setStartCrop(Crop startCrop) {
+		this.startCrop = startCrop;
+	}
+	
+	public void setEndCrop(Crop endCrop) {
+		this.endCrop = endCrop;
+	}
+	
+	public void setInputSource(String source) {
+		this.inputSource = source;
 	}
 }
