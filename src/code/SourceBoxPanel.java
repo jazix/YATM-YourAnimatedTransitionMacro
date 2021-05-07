@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 public class SourceBoxPanel extends JPanel {
@@ -197,9 +198,10 @@ public class SourceBoxPanel extends JPanel {
 		add(chkEnableCrop);
 
 		String[] inputSources = {"none", "Camera 1", "Camera 2", "Camera 3", "Camera 4", "Camera 5", "Camera 6", "Camera 7", "Camera 8", "Color 1", "Color 2", "Media Player 1", "Media Player 2"};
-		comboInputSource = new JComboBox<String>(inputSources);
+		comboInputSource = new JComboBox<String>();
 		comboInputSource.setEditable(true);
 		comboInputSource.setBounds(222, 11, 100, 22);
+		comboInputSource.setModel(new DefaultComboBoxModel<String>(inputSources));
 		add(comboInputSource);
 		
 		JLabel lblNewLabel_5 = new JLabel("top");
