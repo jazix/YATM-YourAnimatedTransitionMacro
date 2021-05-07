@@ -163,16 +163,14 @@ public class Window extends JFrame {
 			boxes.add(this.sourceBoxPanel2.getSourceBox());
 			boxes.add(this.sourceBoxPanel3.getSourceBox());
 			boxes.add(this.sourceBoxPanel4.getSourceBox());
-
-        	this.txtDescription.setText("1");
         	
 			//generate macro
 			Macro macro = new Macro(
-				Integer.parseInt(/*txtIndex.getText().isBlank() ? "1" : */txtIndex.getText()),
-				/*txtTitle.getText().isBlank() ? "new_macro" : */txtTitle.getText(),
+				txtIndex.getText().equals("") ? 1 : Integer.parseInt(txtIndex.getText()),
+				txtTitle.getText(),
 				txtDescription.getText(),
 				boxes,
-				Integer.parseInt(/*txtFrameCount.getText().isBlank() ? "1" : */txtFrameCount.getText())
+				txtFrameCount.getText().equals("") ? 1 : Integer.parseInt(txtFrameCount.getText())
 			);
 			String tmp = macro.generate();
 			//write macro to file

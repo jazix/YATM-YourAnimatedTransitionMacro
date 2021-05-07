@@ -25,10 +25,14 @@ public class Macro {
 				+ "<MacroPool>\r\n"
 				+ "<Macro index=\""+index+"\" name=\""+title+"\" description=\""+description+"\">";
 		
-		//enable boxes and cropping
+		//enable boxes
 		for(SourceBox box : sourceBoxes) {
-			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isEnabled()+"\"/>"
-					+ "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isCropEnabled()+"\"/>";
+			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isEnabled()+"\"/>";
+		}
+		
+		//enable cropping
+		for(SourceBox box : sourceBoxes) {
+			result += "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isCropEnabled()+"\"/>";
 		}
 		
 		//calculate frames
