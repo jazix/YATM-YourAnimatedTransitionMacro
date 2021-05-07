@@ -288,9 +288,10 @@ public class SourceBoxPanel extends JPanel {
 		lblNewLabel_5_3_1.setBounds(328, 219, 30, 14);
 		add(lblNewLabel_5_3_1);
 		
-		JButton btnSwitch = new JButton("reverse");
-		btnSwitch.setBounds(415, 9, 70, 20);
-		add(btnSwitch);
+		JButton btnReverse = new JButton("reverse");
+		btnReverse.setBounds(415, 9, 70, 20);
+		btnReverse.setOpaque(false);
+		add(btnReverse);
 		
 		lblSource = new JLabel("source:");
 		lblSource.setForeground(Color.LIGHT_GRAY);
@@ -302,7 +303,7 @@ public class SourceBoxPanel extends JPanel {
 		lblNewLabel_5_5.setBounds(328, 188, 30, 14);
 		add(lblNewLabel_5_5);
 		
-		btnSwitch.addActionListener(e -> {
+		btnReverse.addActionListener(e -> {
 			//position
 			String tmp = this.txtStartPosX.getText();
 			this.txtStartPosX.setText(this.txtEndPosX.getText());

@@ -30,6 +30,11 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import javax.swing.SwingConstants;
 
+/*
+ * TODO
+ * Append funktion / mehrere transitions hinzufügen
+ */
+
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;

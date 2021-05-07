@@ -1,35 +1,13 @@
 package code;
 
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.net.URI;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
-import java.nio.file.WatchEvent.Kind;
-import java.nio.file.WatchEvent.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.DocumentBuilder;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 
 public class MacroReader {
 	
@@ -42,7 +20,7 @@ public class MacroReader {
 	 */
 	public MacroSettings read(File fileToRead) {
 		//setup
-		int index = 0, frameCount = 0;
+		int index = 0;
 		String title = null, description = "";
 		List<SourceBox> sourceBoxes = new ArrayList<SourceBox>(4);
 		for(int i = 0; i<4; i++) {
@@ -105,6 +83,13 @@ public class MacroReader {
 			}
 		}
 				
+		readTransition(lines, sourceBoxes);
+		
+		return new MacroSettings(index, title, description, countSleepTags, sourceBoxes);
+	}
+	
+	public void readTransition(List<String> lines, List<SourceBox> sourceBoxes) {
+		String line = "";
 		//save first occurencies for start values
 		for(int i = lines.size()-1; i > 0 ; i--) {
 			line = lines.get(i);
@@ -227,8 +212,6 @@ public class MacroReader {
 				continue;
 			}
 		}
-		
-		return new MacroSettings(index, title, description, countSleepTags, sourceBoxes);
 	}
 	
 	public String getAttributeValue(String attribute, String line) {
