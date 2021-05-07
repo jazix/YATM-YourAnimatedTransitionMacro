@@ -3,23 +3,12 @@ package code;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import javax.swing.JCheckBox;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class SourceBoxPanel extends JPanel {
 
@@ -46,16 +35,19 @@ public class SourceBoxPanel extends JPanel {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
+	private int index = 0;
+	private JTextField txtest;
 
 	/**
 	 * Create the panel.
 	 */
-	public SourceBoxPanel() {
+	public SourceBoxPanel(int index) {
+		this.index = index;
 		setBackground(Color.DARK_GRAY);
 		setBorder(new LineBorder(Color.GRAY));
 		setLayout(null);
 		
-		chkEnableBox = new JCheckBox("enable Box");
+		chkEnableBox = new JCheckBox("enable Box "+index);
 		chkEnableBox.setForeground(Color.WHITE);
 		chkEnableBox.setBackground(Color.DARK_GRAY);
 		chkEnableBox.setBounds(7, 7, 116, 25);
@@ -67,12 +59,12 @@ public class SourceBoxPanel extends JPanel {
 		add(lblNewLabel);
 		
 		txtStartPosX = new JTextField();
-		txtStartPosX.setBounds(40, 78, 30, 25);
+		txtStartPosX.setBounds(30, 78, 40, 25);
 		add(txtStartPosX);
 		txtStartPosX.setColumns(2);
 		
 		txtStartPosY = new JTextField();
-		txtStartPosY.setBounds(80, 78, 30, 25);
+		txtStartPosY.setBounds(80, 78, 40, 25);
 		txtStartPosY.setColumns(4);
 		add(txtStartPosY);
 		
@@ -82,12 +74,12 @@ public class SourceBoxPanel extends JPanel {
 		add(lblEndPosition);
 		
 		txtEndPosX = new JTextField();
-		txtEndPosX.setBounds(152, 78, 30, 25);
+		txtEndPosX.setBounds(142, 78, 40, 25);
 		txtEndPosX.setColumns(4);
 		add(txtEndPosX);
 		
 		txtEndPosY = new JTextField();
-		txtEndPosY.setBounds(192, 78, 30, 25);
+		txtEndPosY.setBounds(192, 78, 40, 25);
 		txtEndPosY.setColumns(4);
 		add(txtEndPosY);
 		
@@ -97,7 +89,7 @@ public class SourceBoxPanel extends JPanel {
 		add(lblNewLabel_1_2);
 		
 		txtEndSize = new JTextField();
-		txtEndSize.setBounds(344, 78, 30, 25);
+		txtEndSize.setBounds(333, 78, 40, 25);
 		txtEndSize.setColumns(4);
 		add(txtEndSize);
 		
@@ -107,22 +99,22 @@ public class SourceBoxPanel extends JPanel {
 		add(lblNewLabel_1_3);
 		
 		txtStartCropTop = new JTextField();
-		txtStartCropTop.setBounds(80, 183, 30, 25);
+		txtStartCropTop.setBounds(70, 183, 40, 25);
 		txtStartCropTop.setColumns(4);
 		add(txtStartCropTop);
 		
 		txtStartCropLeft = new JTextField();
-		txtStartCropLeft.setBounds(80, 214, 30, 25);
+		txtStartCropLeft.setBounds(70, 214, 40, 25);
 		txtStartCropLeft.setColumns(4);
 		add(txtStartCropLeft);
 		
 		txtStartCropRight = new JTextField();
-		txtStartCropRight.setBounds(170, 214, 30, 25);
+		txtStartCropRight.setBounds(159, 214, 40, 25);
 		txtStartCropRight.setColumns(4);
 		add(txtStartCropRight);
 		
 		txtStartCropBottom = new JTextField();
-		txtStartCropBottom.setBounds(170, 183, 30, 25);
+		txtStartCropBottom.setBounds(159, 183, 40, 25);
 		txtStartCropBottom.setColumns(4);
 		add(txtStartCropBottom);
 		
@@ -132,7 +124,7 @@ public class SourceBoxPanel extends JPanel {
 		add(lblNewLabel_1_1);
 		
 		txtStartSize = new JTextField();
-		txtStartSize.setBounds(344, 35, 30, 25);
+		txtStartSize.setBounds(333, 35, 40, 25);
 		txtStartSize.setColumns(4);
 		add(txtStartSize);
 		
@@ -142,47 +134,47 @@ public class SourceBoxPanel extends JPanel {
 		add(lblNewLabel_1_4);
 		
 		txtEndCropTop = new JTextField();
-		txtEndCropTop.setBounds(269, 183, 30, 25);
+		txtEndCropTop.setBounds(258, 183, 40, 25);
 		txtEndCropTop.setColumns(4);
 		add(txtEndCropTop);
 		
 		txtEndCropLeft = new JTextField();
-		txtEndCropLeft.setBounds(269, 214, 30, 25);
+		txtEndCropLeft.setBounds(258, 214, 40, 25);
 		txtEndCropLeft.setColumns(4);
 		add(txtEndCropLeft);
 		
 		txtEndCropRight = new JTextField();
-		txtEndCropRight.setBounds(357, 214, 30, 25);
+		txtEndCropRight.setBounds(347, 214, 40, 25);
 		txtEndCropRight.setColumns(4);
 		add(txtEndCropRight);
 		
 		txtEndCropBottom = new JTextField();
-		txtEndCropBottom.setBounds(357, 183, 30, 25);
+		txtEndCropBottom.setBounds(347, 183, 40, 25);
 		txtEndCropBottom.setColumns(4);
 		add(txtEndCropBottom);
 		
 		JLabel lblNewLabel_1 = new JLabel("x");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_1.setBounds(40, 63, 30, 14);
+		lblNewLabel_1.setBounds(30, 63, 40, 14);
 		add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("y");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_2.setBounds(80, 63, 30, 14);
+		lblNewLabel_2.setBounds(80, 63, 43, 14);
 		add(lblNewLabel_2);
 		
 		lblNewLabel_3 = new JLabel("y");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_3.setBounds(192, 63, 30, 14);
+		lblNewLabel_3.setBounds(192, 63, 40, 14);
 		add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("x");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_4.setBounds(152, 63, 30, 14);
+		lblNewLabel_4.setBounds(142, 63, 40, 14);
 		add(lblNewLabel_4);
 		
 		chkEnableCrop = new JCheckBox("enable cropping");
@@ -193,7 +185,7 @@ public class SourceBoxPanel extends JPanel {
 		
 		JLabel lblNewLabel_5 = new JLabel("top");
 		lblNewLabel_5.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_5.setBounds(50, 188, 30, 14);
+		lblNewLabel_5.setBounds(50, 188, 23, 14);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_5_1 = new JLabel("left");
@@ -230,41 +222,81 @@ public class SourceBoxPanel extends JPanel {
 		lblNewLabel_5_3_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_5_3_1.setBounds(309, 219, 30, 14);
 		add(lblNewLabel_5_3_1);
+		
+		JButton btnSwitch = new JButton("switch");
+		btnSwitch.setBounds(121, 8, 89, 23);
+		add(btnSwitch);
+		
+		txtest = new JTextField();
+		txtest.setBounds(176, 121, 158, 20);
+		add(txtest);
+		txtest.setColumns(10);
+		
+		btnSwitch.addActionListener(e -> {
+			//position
+			String tmp = this.txtStartPosX.getText();
+			this.txtStartPosX.setText(this.txtEndPosX.getText());
+			this.txtEndPosX.setText(tmp);
+			tmp = this.txtStartPosY.getText();
+			this.txtStartPosY.setText(this.txtEndPosY.getText());
+			this.txtEndPosY.setText(tmp);
+			
+			//size
+			tmp = this.txtStartSize.getText();
+			this.txtStartSize.setText(this.txtEndSize.getText());
+			this.txtEndSize.setText(tmp);
+			
+			//crop
+			tmp = this.txtStartCropTop.getText();
+			this.txtStartCropTop.setText(this.txtEndCropTop.getText());
+			this.txtEndCropTop.setText(tmp);
+
+			tmp = this.txtStartCropLeft.getText();
+			this.txtStartCropLeft.setText(this.txtEndCropLeft.getText());
+			this.txtEndCropLeft.setText(tmp);
+			
+			tmp = this.txtStartCropRight.getText();
+			this.txtStartCropRight.setText(this.txtEndCropRight.getText());
+			this.txtEndCropRight.setText(tmp);
+
+			tmp = this.txtStartCropBottom.getText();
+			this.txtStartCropBottom.setText(this.txtEndCropBottom.getText());
+			this.txtEndCropBottom.setText(tmp);
+		});
 
 	}
 
-	@Override
-	public String toString() {
-		return "test";
-	}
-
-	public SourceBox getSourceBox(int index) {
-		return new SourceBox(
-				index,
-				this.chkEnableBox.isSelected(),
-				
-				new Position(
-						Float.parseFloat(this.txtStartPosX.getText().isBlank() ? "0" : this.txtStartPosX.getText()),
-						Float.parseFloat(this.txtStartPosY.getText().isBlank() ? "0" : this.txtStartPosY.getText())),
-				new Position(
-						Float.parseFloat(this.txtEndPosX.getText().isBlank() ? "0" : this.txtEndPosX.getText()),
-						Float.parseFloat(this.txtEndPosY.getText().isBlank() ? "0" : this.txtEndPosY.getText())),
-				
-				Float.parseFloat(this.txtStartSize.getText().isBlank() ? "0" : this.txtStartSize.getText()),
-				Float.parseFloat(this.txtEndSize.getText().isBlank() ? "0" : this.txtEndSize.getText()),
-				
-				this.chkEnableCrop.isSelected(),
-				
-				new Crop(
-						Float.parseFloat(this.txtStartCropTop.getText().isBlank() ? "0" : this.txtStartCropTop.getText()),
-						Float.parseFloat(this.txtStartCropLeft.getText().isBlank() ? "0" : this.txtStartCropLeft.getText()),
-						Float.parseFloat(this.txtStartCropRight.getText().isBlank() ? "0" : this.txtStartCropRight.getText()),
-						Float.parseFloat(this.txtStartCropBottom.getText().isBlank() ? "0" : this.txtStartCropBottom.getText())),
-				new Crop(
-						Float.parseFloat(this.txtEndCropTop.getText().isBlank() ? "0" : this.txtEndCropTop.getText()),
-						Float.parseFloat(this.txtEndCropLeft.getText().isBlank() ? "0" : this.txtEndCropLeft.getText()),
-						Float.parseFloat(this.txtEndCropRight.getText().isBlank() ? "0" : this.txtEndCropRight.getText()),
-						Float.parseFloat(this.txtEndCropBottom.getText().isBlank() ? "0" : this.txtEndCropBottom.getText()))
-			);
+	public SourceBox getSourceBox() {
+		
+		//this.index
+		boolean enabled = this.chkEnableBox.isSelected();
+		txtest.setText(txtest.getText()+"1");
+		Position startPos = new Position(
+				this.txtStartPosX.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartPosX.getText()),
+				this.txtStartPosY.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartPosY.getText()));
+		txtest.setText(txtest.getText()+"2");
+		Position endPos = new Position(
+				this.txtEndPosX.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndPosX.getText()),
+				this.txtEndPosY.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndPosY.getText()));
+		txtest.setText(txtest.getText()+"3");
+		float startSize = this.txtStartSize.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartSize.getText());
+		txtest.setText(txtest.getText()+"4");
+		float endSize = this.txtEndSize.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndSize.getText());
+		txtest.setText(txtest.getText()+"5");
+		boolean cropEnabled = this.chkEnableCrop.isSelected();
+		txtest.setText(txtest.getText()+"6");
+		Crop startCrop = new Crop(
+				this.txtStartCropTop.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartCropTop.getText()),
+				this.txtStartCropLeft.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartCropLeft.getText()),
+				this.txtStartCropRight.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartCropRight.getText()),
+				this.txtStartCropBottom.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtStartCropBottom.getText()));
+		txtest.setText(txtest.getText()+"7");
+		Crop endCrop = new Crop(
+				this.txtEndCropTop.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndCropTop.getText()),
+				this.txtEndCropLeft.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndCropLeft.getText()),
+				this.txtEndCropRight.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndCropRight.getText()),
+				this.txtEndCropBottom.getText().isBlank() ? 0.0f : Float.parseFloat(this.txtEndCropBottom.getText()));
+		txtest.setText(txtest.getText()+"8");
+		return new SourceBox(this.index, enabled, startPos, endPos, startSize, endSize, cropEnabled, startCrop, endCrop);
 	}
 }

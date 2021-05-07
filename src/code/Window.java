@@ -2,18 +2,13 @@ package code;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.EventQueue;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
@@ -97,19 +92,19 @@ public class Window extends JFrame {
 		lblNewLabel_3.setBounds(27, 14, 59, 14);
 		contentPane.add(lblNewLabel_3);
 		
-		sourceBoxPanel1 = new SourceBoxPanel();
+		sourceBoxPanel1 = new SourceBoxPanel(0);
 		sourceBoxPanel1.setBounds(10, 96, 398, 248);
 		contentPane.add(sourceBoxPanel1);
 		
-		sourceBoxPanel2 = new SourceBoxPanel();
-		sourceBoxPanel2.setBounds(10, 355, 398, 248);
+		sourceBoxPanel2 = new SourceBoxPanel(1);
+		sourceBoxPanel2.setBounds(418, 96, 398, 248);
 		contentPane.add(sourceBoxPanel2);
 		
-		sourceBoxPanel3 = new SourceBoxPanel();
-		sourceBoxPanel3.setBounds(418, 96, 398, 248);
+		sourceBoxPanel3 = new SourceBoxPanel(2);
+		sourceBoxPanel3.setBounds(10, 355, 398, 248);
 		contentPane.add(sourceBoxPanel3);
 		
-		sourceBoxPanel4 = new SourceBoxPanel();
+		sourceBoxPanel4 = new SourceBoxPanel(3);
 		sourceBoxPanel4.setBounds(418, 355, 398, 248);
 		contentPane.add(sourceBoxPanel4);
 		
@@ -156,6 +151,7 @@ public class Window extends JFrame {
 			 
 			if (userSelection == JFileChooser.APPROVE_OPTION) {
 			    fileToSave = fileChooser.getSelectedFile();
+
 			    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 			} else {
 				return;
@@ -163,21 +159,22 @@ public class Window extends JFrame {
 			
 			//collect Box parameters
 			List<SourceBox> boxes = new LinkedList<>();
-			boxes.add(this.sourceBoxPanel1.getSourceBox(1));
-			boxes.add(this.sourceBoxPanel2.getSourceBox(2));
-			boxes.add(this.sourceBoxPanel3.getSourceBox(3));
-			boxes.add(this.sourceBoxPanel4.getSourceBox(4));
-						
+			boxes.add(this.sourceBoxPanel1.getSourceBox());
+			boxes.add(this.sourceBoxPanel2.getSourceBox());
+			boxes.add(this.sourceBoxPanel3.getSourceBox());
+			boxes.add(this.sourceBoxPanel4.getSourceBox());
+
+        	this.txtDescription.setText("1");
+        	
 			//generate macro
 			Macro macro = new Macro(
-				Integer.parseInt(txtIndex.getText().isBlank() ? "1" : txtIndex.getText()),
-				txtTitle.getText().isBlank() ? "new_macro" : txtTitle.getText(),
+				Integer.parseInt(/*txtIndex.getText().isBlank() ? "1" : */txtIndex.getText()),
+				/*txtTitle.getText().isBlank() ? "new_macro" : */txtTitle.getText(),
 				txtDescription.getText(),
 				boxes,
-				Integer.parseInt(txtFrameCount.getText().isBlank() ? "1" : txtFrameCount.getText())
+				Integer.parseInt(/*txtFrameCount.getText().isBlank() ? "1" : */txtFrameCount.getText())
 			);
 			String tmp = macro.generate();
-			
 			//write macro to file
 			try {
 				FileWriter myWriter = new FileWriter(fileToSave);
@@ -187,6 +184,7 @@ public class Window extends JFrame {
 	        } catch (IOException ex) {
 	        	System.out.println("An error occurred.");
 	        	ex.printStackTrace();
+	        	this.txtDescription.setText(ex.toString());
 	        }
 		});
 	}
