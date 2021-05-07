@@ -8,13 +8,12 @@ public class Macro {
 	private List<SourceBox> sourceBoxes;
 	private int frameCount, index;
 	
-	public Macro(int index, String title, String description, List<SourceBox> sourceBoxes, int frameCount) {
-		this.index = index;
-		this.title = title;
-		this.description = description;
-		this.sourceBoxes = sourceBoxes;
-		this.frameCount = frameCount;
-		this.index = index;
+	public Macro(MacroSettings settings) {
+		this.index = settings.getIndex();
+		this.title = settings.getTitle();
+		this.description = settings.getDescription();
+		this.frameCount = settings.getFrameCount();
+		this.sourceBoxes = settings.getSourceBoxes();
 	}
 	
 	

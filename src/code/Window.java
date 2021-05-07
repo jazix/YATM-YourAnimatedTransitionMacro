@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 
@@ -171,17 +173,22 @@ public class Window extends JFrame {
 			//select target file
 			File fileToSave;
 			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
 			fileChooser.setDialogTitle("Specify a file to save");   
-			 
+			fileChooser.setFileFilter(xmlfilter);
+			
 			int userSelection = fileChooser.showSaveDialog(this);
 			 
 			if (userSelection == JFileChooser.APPROVE_OPTION) {
 			    fileToSave = fileChooser.getSelectedFile();
-
 			    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 			} else {
 				return;
 			}			
+			
+			if(!fileToSave.getName().matches(".*\\.[x|X][m|M][l|L]$")) {
+				fileToSave = new File(fileToSave.getAbsolutePath()+".xml");
+			}
 			
 			//collect Box parameters
 			List<SourceBox> boxes = new LinkedList<>();
@@ -192,11 +199,13 @@ public class Window extends JFrame {
         	
 			//generate macro
 			Macro macro = new Macro(
-				txtIndex.getText().equals("") ? 1 : Integer.parseInt(txtIndex.getText()),
-				txtTitle.getText(),
-				txtDescription.getText(),
-				boxes,
-				txtFrameCount.getText().equals("") ? 1 : Integer.parseInt(txtFrameCount.getText())
+				new MacroSettings(
+					txtIndex.getText().equals("") ? 1 : Integer.parseInt(txtIndex.getText()),
+					txtTitle.getText(),
+					txtDescription.getText(),
+					txtFrameCount.getText().equals("") ? 1 : Integer.parseInt(txtFrameCount.getText()),
+					boxes
+				)
 			);
 			String tmp = macro.generate();
 			//write macro to file
@@ -212,7 +221,7 @@ public class Window extends JFrame {
 	        }
 		});
 
-		/*
+		
 		JButton btnRead = new JButton("import macro");
 		btnRead.setIcon(null);
 		btnRead.setBackground(Color.WHITE);
@@ -236,19 +245,10 @@ public class Window extends JFrame {
 				return;
 			}	
 			
-			//TODO
-			//read header
-				//index
-				//title
-				//desc
-				//enabled cams
-				//enabled crops
-				//inputSources
-			//count frames
-			//read first frame
-			//read last frame
+			MacroReader reader = new MacroReader();
+			reader.read(fileToRead);
 			
-		});*/
+		});
 	}
 	
 	/*
