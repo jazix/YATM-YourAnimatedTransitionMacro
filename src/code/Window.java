@@ -26,14 +26,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
 
-
-/*
- * TODO:
- * max chars:
- * 	title: 20
- *  desc: 125
- */
-
 public class Window extends JFrame {
 
 	/**
@@ -99,7 +91,7 @@ public class Window extends JFrame {
 		sourceBoxPanel1 = new SourceBoxPanel(0);
 		sourceBoxPanel1.setBounds(10, 96, 398, 248);
 		contentPane.add(sourceBoxPanel1);
-		
+				
 		sourceBoxPanel2 = new SourceBoxPanel(1);
 		sourceBoxPanel2.setBounds(418, 96, 398, 248);
 		contentPane.add(sourceBoxPanel2);
@@ -148,7 +140,7 @@ public class Window extends JFrame {
 		txtIndex.setColumns(10);
 		txtIndex.setDocument(new JTextFieldLimitNumberOnly(2));
 		
-		JLabel linkCoffee = new JLabel("buy me a coffee :)");
+		JLabel linkCoffee = new JLabel("buy us a coffee :)");
 		linkCoffee.setBackground(Color.DARK_GRAY);
 		linkCoffee.setForeground(Color.WHITE);
 		linkCoffee.setBounds(374, 614, 95, 13);

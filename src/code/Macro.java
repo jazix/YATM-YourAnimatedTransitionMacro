@@ -25,14 +25,13 @@ public class Macro {
 				+ "<MacroPool>\r\n"
 				+ "<Macro index=\""+index+"\" name=\""+title+"\" description=\""+description+"\">";
 		
-		//enable boxes
+		//enable boxes and cropping
+		//+ select inputSource
 		for(SourceBox box : sourceBoxes) {
-			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isEnabled()?"True":"False")+"\"/>";
-		}
-		
-		//enable cropping
-		for(SourceBox box : sourceBoxes) {
-			result += "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isCropEnabled()?"True":"False")+"\"/>";
+			String source = box.getInputSource().replaceAll("\\s+","");
+			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isEnabled()?"True":"False")+"\"/>"
+					+ "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isCropEnabled()?"True":"False")+"\"/>"
+					+ (source.equals("none")?"":"\r\n<Op id=\"SuperSourceV2BoxInput\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" input=\""+source+"\"/>");
 		}
 		
 		//calculate frames

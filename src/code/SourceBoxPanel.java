@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -32,6 +33,7 @@ public class SourceBoxPanel extends JPanel {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
+	private JComboBox<String> comboInputSource;
 	private int index = 0;
 
 	/**
@@ -44,7 +46,7 @@ public class SourceBoxPanel extends JPanel {
 		setBorder(new LineBorder(Color.GRAY));
 		setLayout(null);
 		
-		chkEnableBox = new JCheckBox("enable Box "+index);
+		chkEnableBox = new JCheckBox("enable Box "+(index+1));
 		chkEnableBox.setForeground(Color.WHITE);
 		chkEnableBox.setBackground(Color.DARK_GRAY);
 		chkEnableBox.setBounds(7, 7, 116, 25);
@@ -193,6 +195,12 @@ public class SourceBoxPanel extends JPanel {
 		chkEnableCrop.setBackground(Color.DARK_GRAY);
 		chkEnableCrop.setBounds(27, 122, 124, 23);
 		add(chkEnableCrop);
+
+		String[] inputSources = {"none", "Camera 1", "Camera 2", "Camera 3", "Camera 4", "Camera 5", "Camera 6", "Camera 7", "Camera 8", "Color 1", "Color 2", "Media Player 1", "Media Player 2"};
+		comboInputSource = new JComboBox<String>(inputSources);
+		comboInputSource.setEditable(true);
+		comboInputSource.setBounds(222, 11, 100, 22);
+		add(comboInputSource);
 		
 		JLabel lblNewLabel_5 = new JLabel("top");
 		lblNewLabel_5.setForeground(Color.LIGHT_GRAY);
@@ -275,6 +283,9 @@ public class SourceBoxPanel extends JPanel {
 	public SourceBox getSourceBox() {
 		
 		boolean enabled = this.chkEnableBox.isSelected();
+		
+		String inputSource = (String) this.comboInputSource.getSelectedItem();
+		
 		Position startPos = new Position(
 				this.txtStartPosX.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartPosX.getText()),
 				this.txtStartPosY.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartPosY.getText()));
@@ -298,6 +309,6 @@ public class SourceBoxPanel extends JPanel {
 				this.txtEndCropRight.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropRight.getText()),
 				this.txtEndCropBottom.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropBottom.getText()));
 
-		return new SourceBox(this.index, enabled, startPos, endPos, startSize, endSize, cropEnabled, startCrop, endCrop);
+		return new SourceBox(this.index, enabled, inputSource, startPos, endPos, startSize, endSize, cropEnabled, startCrop, endCrop);
 	}
 }

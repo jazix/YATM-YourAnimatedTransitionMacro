@@ -14,12 +14,14 @@ public class SourceBox {
 	private boolean enableCrop;
 	private Crop startCrop;
 	private Crop endCrop;
+	private String inputSource;
 	
 	public SourceBox() {}
 	
-	public SourceBox(int index, boolean enable, Position startPosition, Position endPosition, float startSize, float endSize, boolean enableCrop, Crop startCrop, Crop endCrop) {
+	public SourceBox(int index, boolean enable, String inputSource, Position startPosition, Position endPosition, float startSize, float endSize, boolean enableCrop, Crop startCrop, Crop endCrop) {
 		this.index = index;
 		this.enable = enable;
+		this.inputSource = inputSource;
 		this.startPosition = startPosition;
 		this.endPosition = endPosition;
 		this.startSize = startSize;
@@ -35,6 +37,10 @@ public class SourceBox {
 	
 	public boolean isEnabled() {
 		return this.enable;
+	}
+
+	public String getInputSource() {
+		return this.inputSource;
 	}
 	
 	public Position getStartPosition() {
@@ -118,6 +124,7 @@ public class SourceBox {
 		this.crops.add(this.endCrop);
 	}
 	
+	//return calculated values
 	public Position getPosition(int i) {
 		return positions.get(i);
 	}
