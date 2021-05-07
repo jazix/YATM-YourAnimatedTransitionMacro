@@ -27,12 +27,12 @@ public class Macro {
 		
 		//enable boxes
 		for(SourceBox box : sourceBoxes) {
-			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isEnabled()+"\"/>";
+			result += "\r\n<Op id=\"SuperSourceV2BoxEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isEnabled()?"True":"False")+"\"/>";
 		}
 		
 		//enable cropping
 		for(SourceBox box : sourceBoxes) {
-			result += "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+box.isCropEnabled()+"\"/>";
+			result += "\r\n<Op id=\"SuperSourceV2BoxMaskEnable\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" enable=\""+(box.isCropEnabled()?"True":"False")+"\"/>";
 		}
 		
 		//calculate frames

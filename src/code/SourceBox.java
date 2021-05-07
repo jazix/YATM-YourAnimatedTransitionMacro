@@ -87,7 +87,6 @@ public class SourceBox {
 		}
 		this.positions.add(this.endPosition);
 		
-		
 		//size
 		float stepSizeSize = (this.endSize - this.startSize) / (frameCount-1);
 

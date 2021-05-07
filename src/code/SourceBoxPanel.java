@@ -58,11 +58,13 @@ public class SourceBoxPanel extends JPanel {
 		txtStartPosX = new JTextField();
 		txtStartPosX.setBounds(30, 78, 40, 25);
 		add(txtStartPosX);
+		txtStartPosX.setDocument(new JTextFieldLimitNumberOnly(6));
 		txtStartPosX.setColumns(2);
 		
 		txtStartPosY = new JTextField();
 		txtStartPosY.setBounds(80, 78, 40, 25);
 		txtStartPosY.setColumns(4);
+		txtStartPosY.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartPosY);
 		
 		JLabel lblEndPosition = new JLabel("end position");
@@ -73,11 +75,13 @@ public class SourceBoxPanel extends JPanel {
 		txtEndPosX = new JTextField();
 		txtEndPosX.setBounds(142, 78, 40, 25);
 		txtEndPosX.setColumns(4);
+		txtEndPosX.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndPosX);
 		
 		txtEndPosY = new JTextField();
 		txtEndPosY.setBounds(192, 78, 40, 25);
 		txtEndPosY.setColumns(4);
+		txtEndPosY.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndPosY);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("end size");
@@ -88,6 +92,7 @@ public class SourceBoxPanel extends JPanel {
 		txtEndSize = new JTextField();
 		txtEndSize.setBounds(333, 78, 40, 25);
 		txtEndSize.setColumns(4);
+		txtEndSize.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndSize);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("start crops");
@@ -98,21 +103,25 @@ public class SourceBoxPanel extends JPanel {
 		txtStartCropTop = new JTextField();
 		txtStartCropTop.setBounds(70, 183, 40, 25);
 		txtStartCropTop.setColumns(4);
+		txtStartCropTop.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartCropTop);
 		
 		txtStartCropLeft = new JTextField();
 		txtStartCropLeft.setBounds(70, 214, 40, 25);
 		txtStartCropLeft.setColumns(4);
+		txtStartCropLeft.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartCropLeft);
 		
 		txtStartCropRight = new JTextField();
 		txtStartCropRight.setBounds(159, 214, 40, 25);
 		txtStartCropRight.setColumns(4);
+		txtStartCropRight.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartCropRight);
 		
 		txtStartCropBottom = new JTextField();
 		txtStartCropBottom.setBounds(159, 183, 40, 25);
 		txtStartCropBottom.setColumns(4);
+		txtStartCropBottom.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartCropBottom);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("start size");
@@ -123,6 +132,7 @@ public class SourceBoxPanel extends JPanel {
 		txtStartSize = new JTextField();
 		txtStartSize.setBounds(333, 35, 40, 25);
 		txtStartSize.setColumns(4);
+		txtStartSize.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtStartSize);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("end crops");
@@ -133,21 +143,25 @@ public class SourceBoxPanel extends JPanel {
 		txtEndCropTop = new JTextField();
 		txtEndCropTop.setBounds(258, 183, 40, 25);
 		txtEndCropTop.setColumns(4);
+		txtEndCropTop.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndCropTop);
 		
 		txtEndCropLeft = new JTextField();
 		txtEndCropLeft.setBounds(258, 214, 40, 25);
 		txtEndCropLeft.setColumns(4);
+		txtEndCropLeft.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndCropLeft);
 		
 		txtEndCropRight = new JTextField();
 		txtEndCropRight.setBounds(347, 214, 40, 25);
 		txtEndCropRight.setColumns(4);
+		txtEndCropRight.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndCropRight);
 		
 		txtEndCropBottom = new JTextField();
 		txtEndCropBottom.setBounds(347, 183, 40, 25);
 		txtEndCropBottom.setColumns(4);
+		txtEndCropBottom.setDocument(new JTextFieldLimitNumberOnly(6));
 		add(txtEndCropBottom);
 		
 		JLabel lblNewLabel_1 = new JLabel("x");

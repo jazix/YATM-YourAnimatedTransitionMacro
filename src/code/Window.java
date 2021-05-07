@@ -114,10 +114,10 @@ public class Window extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		txtFrameCount = new JTextField();
-		txtFrameCount.setBounds(544, 68, 22, 20);
+		txtFrameCount.setBounds(544, 68, 27, 20);
 		contentPane.add(txtFrameCount);
 		txtFrameCount.setColumns(10);
-		txtFrameCount.setDocument(new JTextFieldLimit(3));
+		txtFrameCount.setDocument(new JTextFieldLimitNumberOnly(3));
 		
 		JButton btnSave = new JButton("save to file");
 		btnSave.setIcon(null);
@@ -142,7 +142,7 @@ public class Window extends JFrame {
 		txtIndex.setBounds(115, 11, 22, 20);
 		contentPane.add(txtIndex);
 		txtIndex.setColumns(10);
-		txtIndex.setDocument(new JTextFieldLimit(3));
+		txtIndex.setDocument(new JTextFieldLimitNumberOnly(2));
 		
 		btnSave.addActionListener(e -> {
 			
