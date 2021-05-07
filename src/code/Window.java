@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -13,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 
 
 /*
@@ -68,7 +72,7 @@ public class Window extends JFrame {
 		setTitle("YTM - Your Transition Macro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 846, 655);
+		setBounds(100, 100, 846, 676);
 		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
 		setIconImage(icon);
 		contentPane = new JPanel();
@@ -144,6 +148,14 @@ public class Window extends JFrame {
 		txtIndex.setColumns(10);
 		txtIndex.setDocument(new JTextFieldLimitNumberOnly(2));
 		
+		JLabel linkCoffee = new JLabel("buy me a coffee :)");
+		linkCoffee.setBackground(Color.DARK_GRAY);
+		linkCoffee.setForeground(Color.WHITE);
+		linkCoffee.setBounds(374, 614, 95, 13);
+		linkCoffee.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		contentPane.add(linkCoffee);
+		linkCoffee.addMouseListener(new LinkMouseListener());
+		
 		btnSave.addActionListener(e -> {
 			
 			//select target file
@@ -191,4 +203,29 @@ public class Window extends JFrame {
 		});
 	}
 
+	/*
+	 * https://stackoverflow.com/questions/527719/how-to-add-hyperlink-in-jlabel
+	 */
+	private static class LinkMouseListener extends MouseAdapter {
+
+	    @Override
+	    public void mouseClicked(java.awt.event.MouseEvent evt) {
+	    	openUri("https://www.buymeacoffee.com/jazix");
+	    }
+	}
+	
+	private static void openUri(String uri) {
+		openUri(URI.create(uri));
+	}
+	
+	/*
+	 * https://stackoverflow.com/questions/527719/how-to-add-hyperlink-in-jlabel
+	 */
+	private static void openUri(URI uri) {
+	    if (Desktop.isDesktopSupported()) {
+	      try {
+	        Desktop.getDesktop().browse(uri);
+	      } catch (IOException e) {}
+	    } else {}
+	  }
 }
