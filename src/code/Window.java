@@ -117,6 +117,7 @@ public class Window extends JFrame {
 		txtFrameCount.setBounds(544, 68, 22, 20);
 		contentPane.add(txtFrameCount);
 		txtFrameCount.setColumns(10);
+		txtFrameCount.setDocument(new JTextFieldLimit(3));
 		
 		JButton btnSave = new JButton("save to file");
 		btnSave.setIcon(null);
@@ -129,16 +130,19 @@ public class Window extends JFrame {
 		txtDescription.setBounds(115, 68, 265, 20);
 		contentPane.add(txtDescription);
 		txtDescription.setColumns(10);
+		txtDescription.setDocument(new JTextFieldLimit(125));
 		
 		txtTitle = new JTextField();
 		txtTitle.setBounds(115, 40, 187, 20);
 		contentPane.add(txtTitle);
 		txtTitle.setColumns(10);
+		txtTitle.setDocument(new JTextFieldLimit(20));
 		
 		txtIndex = new JTextField();
 		txtIndex.setBounds(115, 11, 22, 20);
 		contentPane.add(txtIndex);
 		txtIndex.setColumns(10);
+		txtIndex.setDocument(new JTextFieldLimit(3));
 		
 		btnSave.addActionListener(e -> {
 			

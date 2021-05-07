@@ -12,9 +12,6 @@ import javax.swing.JButton;
 
 public class SourceBoxPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JTextField txtStartPosX;
 	public JTextField txtStartPosY;
@@ -36,12 +33,12 @@ public class SourceBoxPanel extends JPanel {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private int index = 0;
-	private JTextField txtest;
 
 	/**
 	 * Create the panel.
 	 */
 	public SourceBoxPanel(int index) {
+		
 		this.index = index;
 		setBackground(Color.DARK_GRAY);
 		setBorder(new LineBorder(Color.GRAY));
@@ -227,11 +224,6 @@ public class SourceBoxPanel extends JPanel {
 		btnSwitch.setBounds(121, 8, 89, 23);
 		add(btnSwitch);
 		
-		txtest = new JTextField();
-		txtest.setBounds(176, 121, 158, 20);
-		add(txtest);
-		txtest.setColumns(10);
-		
 		btnSwitch.addActionListener(e -> {
 			//position
 			String tmp = this.txtStartPosX.getText();
@@ -268,55 +260,30 @@ public class SourceBoxPanel extends JPanel {
 
 	public SourceBox getSourceBox() {
 		
-		//this.index
 		boolean enabled = this.chkEnableBox.isSelected();
-		txtest.setText(txtest.getText()+"1");
-		
-		
-		
-		
-		Position startPos = new Position(1,1);
-		try {
-		
-		startPos = new Position(
+		Position startPos = new Position(
 				this.txtStartPosX.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartPosX.getText()),
 				this.txtStartPosY.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartPosY.getText()));
-		
-		}catch(Exception ex) {
-			txtest.setText(ex.toString());
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		txtest.setText(txtest.getText()+"2");
 		Position endPos = new Position(
 				this.txtEndPosX.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndPosX.getText()),
 				this.txtEndPosY.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndPosY.getText()));
-		txtest.setText(txtest.getText()+"3");
+
 		float startSize = this.txtStartSize.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartSize.getText());
-		txtest.setText(txtest.getText()+"4");
 		float endSize = this.txtEndSize.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndSize.getText());
-		txtest.setText(txtest.getText()+"5");
+
 		boolean cropEnabled = this.chkEnableCrop.isSelected();
-		txtest.setText(txtest.getText()+"6");
+
 		Crop startCrop = new Crop(
 				this.txtStartCropTop.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartCropTop.getText()),
 				this.txtStartCropLeft.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartCropLeft.getText()),
 				this.txtStartCropRight.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartCropRight.getText()),
 				this.txtStartCropBottom.getText().equals("") ? 0.0f : Float.parseFloat(this.txtStartCropBottom.getText()));
-		txtest.setText(txtest.getText()+"7");
 		Crop endCrop = new Crop(
 				this.txtEndCropTop.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropTop.getText()),
 				this.txtEndCropLeft.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropLeft.getText()),
 				this.txtEndCropRight.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropRight.getText()),
 				this.txtEndCropBottom.getText().equals("") ? 0.0f : Float.parseFloat(this.txtEndCropBottom.getText()));
-		txtest.setText(txtest.getText()+"8");
+
 		return new SourceBox(this.index, enabled, startPos, endPos, startSize, endSize, cropEnabled, startCrop, endCrop);
 	}
 }
