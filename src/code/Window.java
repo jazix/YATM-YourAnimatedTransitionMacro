@@ -61,7 +61,7 @@ public class Window extends JFrame {
 	private SourceBoxPanel sourceBoxPanel3;
 	private SourceBoxPanel sourceBoxPanel4;
 	public Window() {
-		setTitle("YTM - Your Transition Macro");
+		setTitle("YATM - Your Animated Transition Macro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 846, 676);

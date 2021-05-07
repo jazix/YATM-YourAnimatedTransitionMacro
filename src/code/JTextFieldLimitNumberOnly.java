@@ -15,7 +15,7 @@ public class JTextFieldLimitNumberOnly extends JTextFieldLimit {
 	}
 	
 	public boolean isValidNumberString(String str) {
-		return str.matches("\\d+|\\.|\\+|-");
+		return str.matches("(\\d+|\\.|\\+|-)*");
 	}
 
    public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
