@@ -2,6 +2,8 @@ package code;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -25,6 +27,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import javax.swing.SwingConstants;
 
 public class Window extends JFrame {
 
@@ -34,7 +37,6 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtTitle;
-	private JTextField txtDescription;
 
 	/**
 	 * Launch the application.
@@ -60,11 +62,12 @@ public class Window extends JFrame {
 	private SourceBoxPanel sourceBoxPanel2;
 	private SourceBoxPanel sourceBoxPanel3;
 	private SourceBoxPanel sourceBoxPanel4;
+	private JTextArea txtDescription;
 	public Window() {
 		setTitle("YATM - Your Animated Transition Macro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 846, 676);
+		setBounds(100, 100, 1049, 676);
 		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
 		setIconImage(icon);
 		contentPane = new JPanel();
@@ -73,80 +76,95 @@ public class Window extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("title:");
+		JLabel lblNewLabel = new JLabel("Title:");
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(27, 43, 89, 14);
+		lblNewLabel.setBounds(10, 54, 89, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("description:");
+		JLabel lblNewLabel_1 = new JLabel("Description:");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(27, 71, 106, 14);
+		lblNewLabel_1.setBounds(212, 11, 106, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		lblNewLabel_3 = new JLabel("index:");
+		lblNewLabel_3 = new JLabel("Index:");
 		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setBounds(27, 14, 59, 14);
+		lblNewLabel_3.setBounds(10, 25, 59, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		sourceBoxPanel1 = new SourceBoxPanel(0);
-		sourceBoxPanel1.setBounds(10, 96, 398, 248);
+		sourceBoxPanel1.setBounds(10, 96, 500, 248);
 		contentPane.add(sourceBoxPanel1);
 				
 		sourceBoxPanel2 = new SourceBoxPanel(1);
-		sourceBoxPanel2.setBounds(418, 96, 398, 248);
+		sourceBoxPanel2.setBounds(520, 96, 500, 248);
 		contentPane.add(sourceBoxPanel2);
 		
 		sourceBoxPanel3 = new SourceBoxPanel(2);
-		sourceBoxPanel3.setBounds(10, 355, 398, 248);
+		sourceBoxPanel3.setBounds(10, 355, 500, 248);
 		contentPane.add(sourceBoxPanel3);
 		
 		sourceBoxPanel4 = new SourceBoxPanel(3);
-		sourceBoxPanel4.setBounds(418, 355, 398, 248);
+		sourceBoxPanel4.setBounds(520, 355, 500, 248);
 		contentPane.add(sourceBoxPanel4);
 		
 		JLabel lblNewLabel_2 = new JLabel("number of frames:");
 		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setBounds(418, 71, 130, 14);
+		lblNewLabel_2.setBounds(520, 57, 95, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		txtFrameCount = new JTextField();
-		txtFrameCount.setBounds(544, 68, 27, 20);
-		contentPane.add(txtFrameCount);
+		txtFrameCount.setBackground(Color.GRAY);
+		txtFrameCount.setForeground(Color.WHITE);
+		txtFrameCount.setBounds(615, 54, 27, 20);
 		txtFrameCount.setColumns(10);
 		txtFrameCount.setDocument(new JTextFieldLimitNumberOnly(3));
+		txtFrameCount.addMouseListener(new TextFieldHighlightListener());
+		contentPane.add(txtFrameCount);
 		
 		JButton btnSave = new JButton("save to file");
 		btnSave.setIcon(null);
 		btnSave.setBackground(Color.WHITE);
 		btnSave.setForeground(Color.DARK_GRAY);
-		btnSave.setBounds(710, 67, 106, 23);
+		btnSave.setBounds(914, 67, 106, 23);
 		contentPane.add(btnSave);
 		
-		txtDescription = new JTextField();
-		txtDescription.setBounds(115, 68, 265, 20);
-		contentPane.add(txtDescription);
-		txtDescription.setColumns(10);
-		txtDescription.setDocument(new JTextFieldLimit(125));
-		
 		txtTitle = new JTextField();
-		txtTitle.setBounds(115, 40, 187, 20);
-		contentPane.add(txtTitle);
+		txtTitle.setBackground(Color.GRAY);
+		txtTitle.setForeground(Color.WHITE);
+		txtTitle.setBounds(59, 51, 143, 20);
 		txtTitle.setColumns(10);
 		txtTitle.setDocument(new JTextFieldLimit(20));
+		txtTitle.addMouseListener(new TextFieldHighlightListener());
+		contentPane.add(txtTitle);
 		
 		txtIndex = new JTextField();
-		txtIndex.setBounds(115, 11, 22, 20);
-		contentPane.add(txtIndex);
+		txtIndex.setBackground(Color.GRAY);
+		txtIndex.setForeground(Color.WHITE);
+		txtIndex.setBounds(59, 22, 22, 20);
 		txtIndex.setColumns(10);
 		txtIndex.setDocument(new JTextFieldLimitNumberOnly(2));
+		txtIndex.addMouseListener(new TextFieldHighlightListener());
+		contentPane.add(txtIndex);
 		
 		JLabel linkCoffee = new JLabel("buy us a coffee :)");
+		linkCoffee.setHorizontalAlignment(SwingConstants.CENTER);
 		linkCoffee.setBackground(Color.DARK_GRAY);
 		linkCoffee.setForeground(Color.WHITE);
-		linkCoffee.setBounds(374, 614, 95, 13);
+		linkCoffee.setBounds(442, 614, 143, 13);
 		linkCoffee.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		contentPane.add(linkCoffee);
 		linkCoffee.addMouseListener(new LinkMouseListener());
+		contentPane.add(linkCoffee);
+		
+		txtDescription = new JTextArea();
+		txtDescription.setBackground(Color.GRAY);
+		txtDescription.setForeground(Color.WHITE);
+		txtDescription.setBounds(212, 25, 298, 46);
+		txtDescription.setColumns(1);
+		txtDescription.setLineWrap(true);
+		txtDescription.setRows(2);
+		txtDescription.setDocument(new JTextFieldLimit(125));
+		txtDescription.addMouseListener(new TextFieldHighlightListener());
+		contentPane.add(txtDescription);
 		
 		btnSave.addActionListener(e -> {
 			
@@ -232,7 +250,7 @@ public class Window extends JFrame {
 			
 		});*/
 	}
-
+	
 	/*
 	 * https://stackoverflow.com/questions/527719/how-to-add-hyperlink-in-jlabel
 	 */
