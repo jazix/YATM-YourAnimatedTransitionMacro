@@ -370,7 +370,7 @@ public class SourceBoxPanel extends JPanel {
 	
 	public void loadSourceBox(SourceBox sourceBox) {
 		this.chkEnableBox.setSelected(sourceBox.isEnabled());
-		this.comboInputSource.setSelectedItem(sourceBox.getInputSource());
+		this.comboInputSource.setSelectedItem(getInputSourceDisplayName(sourceBox.getInputSource()));
 		this.txtStartPosX.setText(sourceBox.getStartPosition().getX()+"");
 		this.txtStartPosY.setText(sourceBox.getStartPosition().getY()+"");
 		this.txtEndPosX.setText(sourceBox.getEndPosition().getX()+"");
@@ -386,5 +386,22 @@ public class SourceBoxPanel extends JPanel {
 		this.txtEndCropLeft.setText(sourceBox.getEndCrop().getLeft()+"");
 		this.txtEndCropRight.setText(sourceBox.getEndCrop().getRight()+"");
 		this.txtEndCropBottom.setText(sourceBox.getEndCrop().getBottom()+"");
+	}
+	
+	private String getInputSourceDisplayName(String inputSource) {
+		if(inputSource.equals("Camera1")) return "Camera 1";
+		if(inputSource.equals("Camera2")) return "Camera 2";
+		if(inputSource.equals("Camera3")) return "Camera 3";
+		if(inputSource.equals("Camera4")) return "Camera 4";
+		if(inputSource.equals("Camera5")) return "Camera 5";
+		if(inputSource.equals("Camera6")) return "Camera 6";
+		if(inputSource.equals("Camera7")) return "Camera 7";
+		if(inputSource.equals("Camera8")) return "Camera 8";
+		if(inputSource.equals("Color1")) return "Color 1";
+		if(inputSource.equals("Color2")) return "Color 2";
+		if(inputSource.equals("MediaPlayer1")) return "Media Player 1";
+		if(inputSource.equals("MediaPlayer2")) return "Media Player 2";
+
+		return "none";
 	}
 }

@@ -46,7 +46,7 @@ public class MacroReader {
 		String title = null, description = "";
 		List<SourceBox> sourceBoxes = new ArrayList<SourceBox>(4);
 		for(int i = 0; i<4; i++) {
-			sourceBoxes.add(0, new SourceBox(i, false, "", new Position(0,0), new Position(0,0), 0, 0, false, new Crop(0,0,0,0), new Crop(0,0,0,0)));
+			sourceBoxes.add(0, new SourceBox(i, false, "none", new Position(0,0), new Position(0,0), 0, 0, false, new Crop(0,0,0,0), new Crop(0,0,0,0)));
 		}
 		
 		//read File
@@ -60,6 +60,8 @@ public class MacroReader {
 		
 		//parse File
 		String line = "";
+		int countSleepTags = 0;
+		int countSleepFrames = 0;
 		for(int i = 0; i < lines.size() ; i++) {
 			line = lines.get(i);
 
@@ -71,6 +73,13 @@ public class MacroReader {
 				continue;
 			}
 
+			//find sleep frames
+			if(line.matches(".*MacroSleep.*")) {
+				countSleepFrames += Integer.parseInt(getAttributeValue("frames",line));
+				countSleepTags++;
+				continue;
+			}
+			
 			//find enable box
 			if(line.matches(".*SuperSourceV2BoxEnable.*")) {
 				int boxIndex = Integer.parseInt(getAttributeValue("boxIndex",line));
@@ -219,10 +228,7 @@ public class MacroReader {
 			}
 		}
 		
-		//TODO
-		//count frames
-		
-		return new MacroSettings(index, title, description, frameCount, sourceBoxes);
+		return new MacroSettings(index, title, description, countSleepTags, sourceBoxes);
 	}
 	
 	public String getAttributeValue(String attribute, String line) {
