@@ -277,7 +277,7 @@ public class Window extends JFrame {
 			}
 
 			public void checkFrameCount() {
-				if(!txtFrameCount.getText().isBlank()) {
+				if(!txtFrameCount.getText().isEmpty()) {
 					int frameCount = Integer.parseInt(txtFrameCount.getText());
 					
 				    if(frameCount > 30) {
