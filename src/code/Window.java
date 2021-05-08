@@ -4,12 +4,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import java.awt.EventQueue;
@@ -56,7 +60,7 @@ public class Window extends JFrame {
 	}
 
 	private JTextField txtFrameCount;
-	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_3, lblFrameInfo;
 	private JTextField txtIndex;
 	private SourceBoxPanel sourceBoxPanel1;
 	private SourceBoxPanel sourceBoxPanel2;
@@ -248,6 +252,69 @@ public class Window extends JFrame {
 			loadSettings(reader.read(fileToRead));
 			
 		});
+		
+		lblFrameInfo = new JLabel("i");
+		lblFrameInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFrameInfo.setBackground(Color.DARK_GRAY);
+		lblFrameInfo.setForeground(Color.WHITE);
+    	lblFrameInfo.setBorder(new LineBorder(Color.WHITE));
+		lblFrameInfo.setBounds(647, 50, 14, 14);
+		lblFrameInfo.setVisible(false);
+		contentPane.add(lblFrameInfo);
+		
+		txtFrameCount.getDocument().addDocumentListener(new DocumentListener() {
+		  	
+			public void changedUpdate(DocumentEvent e) {
+				checkFrameCount();
+			}
+			
+			public void removeUpdate(DocumentEvent e) {
+				checkFrameCount();
+			}
+			
+			public void insertUpdate(DocumentEvent e) {
+				checkFrameCount();
+			}
+
+			public void checkFrameCount() {
+				if(!txtFrameCount.getText().isBlank()) {
+					int frameCount = Integer.parseInt(txtFrameCount.getText());
+					
+				    if(frameCount > 30) {
+				    	lblFrameInfo.setForeground(Color.ORANGE);
+				    	lblFrameInfo.setBorder(new LineBorder(Color.ORANGE));
+						lblFrameInfo.setText("!");
+				    	lblFrameInfo.setToolTipText("Macro might get too big to load in another switcher.");
+				    	lblFrameInfo.setVisible(true);
+				    	return;
+				    } else if (frameCount < 10) {
+				    	lblFrameInfo.setForeground(Color.WHITE);
+				    	lblFrameInfo.setBorder(new LineBorder(Color.WHITE));
+						lblFrameInfo.setText("i");
+				    	lblFrameInfo.setToolTipText("For smooth transitions we recommend at least 10 frames.");
+				    	lblFrameInfo.setVisible(true);
+				    	return;
+				    }
+				}
+		    	lblFrameInfo.setToolTipText(null);
+		    	lblFrameInfo.setVisible(false);
+			}
+		});
+	}
+	
+	public static class FrameInfoListener extends MouseAdapter{
+
+		public static String text = "";
+		
+	    @Override
+	    public void mouseEntered(java.awt.event.MouseEvent evt) {
+	    	((JComponent)evt.getSource()).setToolTipText("test");
+	    }
+
+	    @Override
+	    public void mouseExited(java.awt.event.MouseEvent evt) {
+	    	((JComponent)evt.getSource()).setBackground(Color.GRAY);
+	    }
 	}
 	
 	public void loadSettings(MacroSettings settings) {

@@ -37,7 +37,7 @@ public class Macro {
 		for(SourceBox box : sourceBoxes) {
 			box.calculateFrames(frameCount);
 		}
-			
+		result += "\r\n";
 		//generate frames
 		for(int i = 0; i < frameCount ; i++) {
 			for(SourceBox box : sourceBoxes) {
