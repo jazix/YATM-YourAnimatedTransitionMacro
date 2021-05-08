@@ -16,7 +16,6 @@ public class Macro {
 		this.sourceBoxes = settings.getSourceBoxes();
 	}
 	
-	
 	public String generate() {
 		//header
 		String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
@@ -37,20 +36,21 @@ public class Macro {
 		for(SourceBox box : sourceBoxes) {
 			box.calculateFrames(frameCount);
 		}
-		result += "\r\n";
+		
 		//generate frames
 		for(int i = 0; i < frameCount ; i++) {
 			for(SourceBox box : sourceBoxes) {
-				Crop crop = box.getCrop(i);
 				Position pos = box.getPosition(i);
 				result += "\r\n<Op id=\"SuperSourceV2BoxXPosition\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" xPosition=\""+pos.getX()+"\"/>"
 						+ "\r\n<Op id=\"SuperSourceV2BoxYPosition\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" yPosition=\""+pos.getY()+"\"/>"
-						+ "\r\n<Op id=\"SuperSourceV2BoxSize\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" size=\""+box.getSize(i)+"\"/>"
-						+ "\r\n<Op id=\"SuperSourceV2BoxMaskTop\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" top=\""+crop.getTop()+"\"/>"
-						+ "\r\n<Op id=\"SuperSourceV2BoxMaskLeft\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" left=\""+crop.getLeft()+"\"/>"
-						+ "\r\n<Op id=\"SuperSourceV2BoxMaskRight\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" right=\""+crop.getRight()+"\"/>"
-						+ "\r\n<Op id=\"SuperSourceV2BoxMaskBottom\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" bottom=\""+crop.getBottom()+"\"/>"
-						+ "";
+						+ "\r\n<Op id=\"SuperSourceV2BoxSize\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" size=\""+box.getSize(i)+"\"/>";
+				if(box.isCropEnabled()) {
+					Crop crop = box.getCrop(i);
+					result += "\r\n<Op id=\"SuperSourceV2BoxMaskTop\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" top=\""+crop.getTop()+"\"/>"
+							+ "\r\n<Op id=\"SuperSourceV2BoxMaskLeft\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" left=\""+crop.getLeft()+"\"/>"
+							+ "\r\n<Op id=\"SuperSourceV2BoxMaskRight\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" right=\""+crop.getRight()+"\"/>"
+							+ "\r\n<Op id=\"SuperSourceV2BoxMaskBottom\" superSource=\"0\" boxIndex=\""+box.getIndex()+"\" bottom=\""+crop.getBottom()+"\"/>";
+				}
 			}
 			
 			result += "\r\n<Op id=\"MacroSleep\" frames=\"1\"/>";
