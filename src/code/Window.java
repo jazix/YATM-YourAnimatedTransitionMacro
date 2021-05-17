@@ -34,17 +34,13 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import javax.swing.SwingConstants;
 
-/*
- * TODO
- * Append funktion / mehrere transitions hinzufügen
- */
-
 public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtTitle;
-
+	private String currentDirectoryPath = "";
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -174,7 +170,7 @@ public class Window extends JFrame {
 			
 			//select target file
 			File fileToSave;
-			JFileChooser fileChooser = new JFileChooser();
+			JFileChooser fileChooser = new JFileChooser(currentDirectoryPath);
 			FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
 			fileChooser.setDialogTitle("Specify a file to save");   
 			fileChooser.setFileFilter(xmlfilter);
@@ -188,10 +184,12 @@ public class Window extends JFrame {
 				return;
 			}			
 			
+			currentDirectoryPath = fileToSave.getAbsolutePath();
+			
 			if(!fileToSave.getName().matches(".*\\.[x|X][m|M][l|L]$")) {
 				fileToSave = new File(fileToSave.getAbsolutePath()+".xml");
 			}
-			
+								
 			//collect Box parameters
 			List<SourceBox> boxes = new LinkedList<>();
 			boxes.add(this.sourceBoxPanel1.getSourceBox());
@@ -234,7 +232,7 @@ public class Window extends JFrame {
 		btnRead.addActionListener(e -> {
 			//select target file
 			File fileToRead;
-			JFileChooser fileChooser = new JFileChooser();
+			JFileChooser fileChooser = new JFileChooser(currentDirectoryPath);
 			fileChooser.setDialogTitle("Specify a file to read");   
 			 
 			int userSelection = fileChooser.showOpenDialog(this);
@@ -250,7 +248,7 @@ public class Window extends JFrame {
 			MacroReader reader = new MacroReader();
 			
 			loadSettings(reader.read(fileToRead));
-			
+			currentDirectoryPath = fileToRead.getAbsolutePath();
 		});
 		
 		lblFrameInfo = new JLabel("i");
